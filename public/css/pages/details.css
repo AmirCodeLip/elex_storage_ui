@@ -1,0 +1,14 @@
+.description-box {
+    direction: rtl;
+    font-size: 15px;
+    padding-right: 20px;
+}
+
+.description-box ol {
+    list-style: arabic-indic;
+    margin-right: 121px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+

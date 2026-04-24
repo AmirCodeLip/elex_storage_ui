@@ -1,0 +1,122 @@
+@font-face {
+  font-family: yekanbakh;
+  src: url("./resources/yekanbakh/YekanBakhRegular.otf") format("opentype");
+}
+
+@font-face {
+  font-family: yekanbakh;
+  font-weight: bold;
+  src: url("./resources/yekanbakh/YekanBakhBold.otf") format("opentype");
+}
+
+@font-face {
+  font-family: "iranwebyekanLight";
+  src: url("./resources/iranwebyekan/iranyekanweblight.eot"),
+    url("./resources/iranwebyekan/iranyekanweblightd41d.eot?#iefix") format("embedded-opentype"),
+    url("./resources/iranwebyekan/iranyekanweblight.woff") format("woff"),
+    url("./resources/iranwebyekan/iranyekanweblight.html") format("woff2"),
+    url("./resources/iranwebyekan/iranyekanweblight.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "iranwebyekanRegular";
+  src: url("./resources/iranwebyekan/iranyekanwebregular.eot"),
+    url("./resources/iranwebyekan/iranyekanwebregulard41d.eot?#iefix") format("embedded-opentype"),
+    url("./resources/iranwebyekan/iranyekanwebregular.woff") format("woff"),
+    url("./resources/iranwebyekan/iranyekanwebregular.html") format("woff2"),
+    url("./resources/iranwebyekan/iranyekanwebregular.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "iranwebyekanBold";
+  src: url("./resources/iranwebyekan/iranyekanwebbold.eot"),
+    url("./resources/iranwebyekan/iranyekanwebboldd41d.eot?#iefix") format("embedded-opentype"),
+    url("./resources/iranwebyekan/iranyekanwebbold.woff") format("woff"),
+    url("./resources/iranwebyekan/iranyekanwebbold.html") format("woff2"),
+    url("./resources/iranwebyekan/iranyekanwebbold.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "iransans";
+  src: url("./resources/iransans/IRANSansWeb.eot"),
+    url("./resources/iransans/IRANSansWebd41d.eot?#iefix") format("embedded-opentype"),
+    url("./resources/iransans/IRANSansWeb.woff") format("woff"),
+    url("./resources/iransans/IRANSansWeb.html") format("woff2"),
+    url("./resources/iransans/IRANSansWeb.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "iransansLight";
+  src: url("./resources/iransans/IRANSansWeb_UltraLight.eot"),
+    url("./resources/iransans/IRANSansWeb_UltraLightd41d.eot?#iefix") format("embedded-opentype"),
+    url("./resources/iransans/IRANSansWeb_UltraLight.woff") format("woff"),
+    url("./resources/iransans/IRANSansWeb_UltraLight.html") format("woff2"),
+    url("./resources/iransans/IRANSansWeb_UltraLight.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "iransansMedium";
+  src: url("./resources/iransans/IRANSansWeb_Medium.eot"),
+    url("./resources/iransans/IRANSansWeb_Mediumd41d.eot?#iefix") format("embedded-opentype"),
+    url("./resources/iransans/IRANSansWeb_Medium.woff") format("woff"),
+    url("./resources/iransans/IRANSansWeb_Medium.html") format("woff2"),
+    url("./resources/iransans/IRANSansWeb_Medium.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "iransansBold";
+  src: url("./resources/iransans/IRANSansWeb_Bold.eot"),
+    url("./resources/iransans/IRANSansWeb_Boldd41d.eot?#iefix") format("embedded-opentype"),
+    url("./resources/iransans/IRANSansWeb_Bold.woff") format("woff"),
+    url("./resources/iransans/IRANSansWeb_Bold.html") format("woff2"),
+    url("./resources/iransans/IRANSansWeb_Bold.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+/* Yekanbakh Font Class */
+.yekanbakh {
+  font-family: yekanbakh;
+}
+
+/* IranWebYekan Fonts Class */
+.iranwebyekan-1 {
+  font-family: "iranwebyekanLight";
+}
+
+.iranwebyekan-2 {
+  font-family: "iranwebyekanRegular";
+}
+
+.iranwebyekan-3 {
+  font-family: "iranwebyekanBold";
+}
+
+/* Iran sans fonts Class */
+.iransans-1 {
+  font-family: "iransans";
+}
+
+.iransans-2 {
+  font-family: "iransansLight";
+}
+
+.iransans-3 {
+  font-family: "iransansMedium";
+}
+
+.iransans-4 {
+  font-family: "iransansBold";
+}

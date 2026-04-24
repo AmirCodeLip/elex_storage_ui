@@ -1,0 +1,79 @@
+.nav-link {
+    padding-left: 1rem;
+    padding-right: 1rem;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    /* border-color: var(--color_layer_001); */
+    border-color: transparent;
+    border-bottom-width: 3px;
+    color: var(--color_layer_052);
+    font-family: "iransansMedium";
+    cursor: pointer;
+
+}
+
+.nav-link:hover {
+    color: var(--color_layer_001);
+    border-color: var(--color_layer_001);
+}
+
+.center-container {
+    top: 10px;
+    max-width: 800px;
+    /* Limit the width of the cart */
+
+    border-radius: 8px;
+    /* Slightly round the corners */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    /* Add a subtle shadow */
+}
+
+.cart-item {
+
+    padding: 10px;
+    /* Padding inside each item */
+    border-bottom: 1px solid #ddd;
+    /* Light grey line between items */
+}
+
+.cart-item img {
+    width: 100px;
+    /* Fixed width for images */
+    height: auto;
+    /* Maintain aspect ratio */
+    margin-right: 15px;
+    /* Space between image and details */
+}
+ 
+
+.total {
+    text-align: right;
+    /* Right align the total */
+    font-size: 1.2em;
+    /* Slightly larger font for total */
+}
+
+/* Responsive Design */
+
+/* Mobile Styles */
+@media (max-width: 600px) {
+    .cart-item {
+        flex-direction: column;
+        /* Stack items on mobile */
+        align-items: center;
+        /* Center align items */
+    }
+
+    .cart-item img {
+        margin: 0 0 10px 0;
+        /* Remove margin-right and add margin-bottom */
+    }
+}
+
+/* Tablet Styles */
+@media (min-width: 601px) and (max-width: 900px) {
+    .cart-item img {
+        width: 80px;
+        /* Smaller image size for tablet */
+    }
+}

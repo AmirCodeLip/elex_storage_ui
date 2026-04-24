@@ -1,0 +1,96 @@
+.rtl {
+    direction: rtl;
+}
+
+.all-left {
+    text-align: left;
+    direction: ltr;
+}
+
+.head-bar,
+.local-divider {
+    border-color: var(--color_layer_039);
+    border-bottom-width: 3px;
+    font-weight: 700;
+    text-align: right;
+    font-family: "iranwebyekanBold";
+    padding: 20px 20px;
+    position: relative;
+}
+
+.head-bar span {
+    position: absolute;
+    height: 3px;
+    background-color: var(--color_layer_001);
+    right: 0;
+    bottom: -3px;
+    border-radius: 10px;
+}
+
+.local-btn {
+    cursor: pointer;
+    text-align: center;
+    display: block;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    margin-top: 1rem;
+    width: 100%;
+    border-width: 2px;
+    border-radius: 0.5rem;
+}
+
+.local-btn-main {
+    color: var(--color_layer_008);
+    background-color: var(--color_layer_001);
+    border-color: var(--color_layer_008);
+    font-family: "iranwebyekanRegular";
+}
+
+.local-btn-main:not(.btn-disabled):hover {
+    color: var(--color_layer_001);
+    background-color: var(--color_layer_008);
+    border-color: var(--color_layer_001);
+}
+
+.local-btn-danger {
+    color: var(--color_layer_008);
+    background-color: var(--color_layer_111);
+    border-color: var(--color_layer_008);
+    font-family: "iranwebyekanRegular";
+}
+
+.local-btn-danger:not(.btn-disabled):hover {
+    color: var(--color_layer_111);
+    background-color: var(--color_layer_008);
+    border-color: var(--color_layer_111);
+}
+
+.btn-disabled {
+    background-color: #ccc;
+    color: #666;
+    cursor: progress;
+    opacity: 0.6;
+}
+
+.local-input {
+    width: 100%;
+    border-radius: 0.375rem;
+    border-width: 1px;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+}
+
+.rial-price {
+    text-align: center;
+    direction: rtl;
+    margin-top: 15px;
+}
+
+.rial-price::after {
+    margin-right: 3px;
+    content: "تومان";
+}

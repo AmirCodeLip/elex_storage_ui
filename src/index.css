@@ -1,0 +1,50 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --color_layer_001: #234582;
+  --color_layer_002: #5f7eb7;
+  --color_layer_007: #ffffff;
+  --color_layer_008: #faf9f7;
+  --color_layer_039: #dddddd;
+  --color_layer_045: #f0f0f0;
+  --color_layer_052: #040303;
+  --color_layer_053: #2e3e4e;
+  --color_layer_111: #f51e1ecb;
+  --color_layer_070: #EF4444;
+
+  /* #e4d9d8 */
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --foreground-rgb: 255, 255, 255;
+    --background-start-rgb: 0, 0, 0;
+    --background-end-rgb: 0, 0, 0;
+  }
+}
+
+body {
+  color: rgb(var(--foreground-rgb));
+  font-family: "iranwebyekan-2";
+  background: linear-gradient(to bottom,
+      transparent,
+      rgb(var(--background-end-rgb))) rgb(var(--background-start-rgb));
+}
+
+
+.local-top-animation {
+  transform: translate3d(0, 0, 0px);
+}
+
+.local-top-animation:hover {
+  /* transition-duration: 2ms; */
+  transform: translate3d(0, -3px, 0px);
+}
+
+.shadow-1-bottom {
+  --tw-shadow: 0 1px 0 rgba(0, 0, 0, .14), 0 2px 0 rgba(0, 0, 0, .05);
+  --tw-shadow-colored: 0 1px 0 var(--tw-shadow-color), 0 2px 0 var(--tw-shadow-color);
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+}

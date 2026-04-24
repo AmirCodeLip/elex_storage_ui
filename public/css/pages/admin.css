@@ -1,0 +1,26 @@
+.rightbar {
+    direction: rtl;
+    text-align: right;
+}
+
+.rightbar-item {
+    opacity: 0.9;
+    color: var(--color_layer_045);
+    cursor: pointer;
+    align-items: center;
+    /* border-bottom: 2px solid rebeccapurple; */
+    margin-top: 2px;
+}
+
+.rightbar-item-title {
+    background-color: #3c4a57;
+}
+
+.rightbar-item-title:hover {
+    opacity: 0.8;
+}
+
+.rightbar-item-single {
+    border-bottom: 1px solid #3c4a57;
+    margin-top: 4px;
+}
