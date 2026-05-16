@@ -2,9 +2,8 @@ import { getAuthHeader, AuthProvider, useAuth } from 'contexts/AuthProvider';
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
-import { Edit24X } from 'Icons';
 import { getPaymentLinks, PaymentLinkDto } from 'api/PaymentLinks';
-
+import { Edit, ArrowLeft, Timer } from 'lucide-react';
 
 
 
@@ -45,7 +44,7 @@ export default function List() {
                 return (
                     <div className="grid grid-cols-6 gap-4 mt-2 border-b pb-4" key={iKey++}>
                         <Link to={`/dashboard/payments/edit/${paymentLink.id}`} className="text-right rtl">
-                            <Edit24X></Edit24X>
+                            <Edit></Edit>
                         </Link>
                         <div className="text-center col-span-2">{process.env.REACT_APP_Server_URI!.substring(8)}/Payments/Get/{paymentLink.id}</div>
                         <div className="text-right rtl">{paymentLink.priceRial}</div>

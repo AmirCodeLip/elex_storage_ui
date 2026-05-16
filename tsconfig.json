@@ -1,13 +1,9 @@
 {
   "compilerOptions": {
-    "target": "es5",
+    "target": "ES2015",
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "esnext"
-    ],
+    "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
     "skipLibCheck": true,
     "esModuleInterop": true,
@@ -15,24 +11,23 @@
     "strict": true,
     "forceConsistentCasingInFileNames": true,
     "noFallthroughCasesInSwitch": true,
-    "module": "esnext",
-    "moduleResolution": "node",
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "types": ["node"],
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
     "jsx": "react-jsx",
+    "ignoreDeprecations": "6.0",
     "baseUrl": "src",
     "paths": {
-      "@/*": [
-        "src/*",
-        "services/*"
-      ],
-      "api/*": [
-        "api/*"
-      ]
+      "@pages/*": ["pages/*"],
+      "@/*": ["*"],
+      "api/*": ["api/*"],
+      "utils/*": ["utils/*"],
+      "services/*": ["services/*"],
+      "contexts/*": ["contexts/*"]
     }
   },
-  "include": [
-    "src"
-  ]
+  "include": ["src"]
 }

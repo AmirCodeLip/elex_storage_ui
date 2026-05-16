@@ -1,7 +1,6 @@
 import { brokers, getBroker, BrokerType } from "api/Terminals";
 import { Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
-import { Edit24X } from 'Icons';
 import { TerminalDto, getTerminals } from 'api/Terminals';
 
 
@@ -37,7 +36,7 @@ export default function TerminalsList() {
                 return (
                     <div key={terminal.id} className="grid grid-cols-8 gap-4 mt-2 border-b pb-4">
                         <Link to={`/dashboard/terminals/edit/${terminal.id}`} className="text-right rtl">
-                            <Edit24X></Edit24X>
+                            {/* <Edit24X></Edit24X> */}
                         </Link>
                         <div className="text-right rtl">{terminal.totalPaymentsRial}</div>
                         <div className="text-right rtl">{terminal.createdAtFA}</div>

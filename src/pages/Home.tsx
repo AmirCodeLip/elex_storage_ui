@@ -1,24 +1,16 @@
-import data from "../data";
 import { Link } from "react-router-dom";
 import React, { useState, ReactElement, useRef } from 'react';
 import { IconType } from 'react-icons';
 import { Cloud, Upload, Folder, Search, SortAscIcon, Grid, List, File, EllipsisVertical, Trash, Edit, Share, Download } from 'lucide-react';
 import axios from "axios";
-import { NewHomeController } from "pages/HomeController"
-// <div className="min-h-screen bg-gray-50" >
-//     <Cloud className="text-blue-600" size={24} />
-
-// </div>
-
+import { NewHomeController } from "./HomeController"
 
 const FileBrowser = () => {
+
     const controller = NewHomeController();
 
 
-    // Close context menu
-    const closeContextMenu = () => {
-        controller.SetContextMenu({ show: false, x: 0, y: 0, itemId: 0 })
-    };
+
     // Mock data for files and directories
     const initialFiles = [
         { id: 1, name: 'Projects', type: 'folder', size: '2.4 GB', modified: '2024-03-20', items: 24 },
@@ -36,34 +28,20 @@ const FileBrowser = () => {
     ];
 
     const [selectedItems, setSelectedItems] = useState(new Set());
-    const [files, setFiles] = useState(initialFiles);
+    // const [files, setFiles] = useState(initialFiles);
     const [searchQuery, setSearchQuery] = useState('');
     const [sortBy, setSortBy] = useState('name');
     const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid'); // 'grid' or 'list'
 
-    // Filter files based on search
-    const filteredFiles = files.filter(file =>
-        file.name.toLowerCase().includes(searchQuery.toLowerCase())
-    );
+    // Close context menu
+    const closeContextMenu = () => {
+        controller.SetContextMenu!({ show: false, x: 0, y: 0, itemId: "0" })
+    };
 
-    // Sort files
-    const sortedFiles = [...filteredFiles].sort((a, b) => {
-        switch (sortBy) {
-            case 'name':
-                return a.name.localeCompare(b.name);
-            case 'size':
-                return parseFloat(a.size) - parseFloat(b.size);
-            case 'modified':
-                let d = (new Date(b.modified)).getDay() - new Date(a.modified).getDay();
-                // let d = (new Date(b.modified)) - new Date(a.modified);
-                return d
-            default:
-                return 0;
-        }
-    });
+
 
     // Handle item selection
-    const handleSelectItem = (e: any, id: number) => {
+    const handleSelectItem = (e: any, id: string) => {
         // React.MouseEvent<HTMLElement, MouseEvent>
         e.stopPropagation();
         const newSelected = new Set(selectedItems);
@@ -76,7 +54,7 @@ const FileBrowser = () => {
     };
 
     // Handle context menu
-    const handleContextMenu = (e: React.MouseEvent<HTMLElement, MouseEvent>, id?: number) => {
+    const handleContextMenu = (e: React.MouseEvent<HTMLElement, MouseEvent>, id?: string) => {
         e.preventDefault();
 
         if (!id) {
@@ -96,33 +74,20 @@ const FileBrowser = () => {
 
     // Format file size
     const formatSize = (size: string) => {
-        return size;
+        return size ?? 0;
     };
 
-    // Get icon based on file type
-    const getFileIcon = (type: string) => {
-        switch (type) {
-            // case 'folder': return <FaFolder className="text-blue-500" />;
-            // case 'pdf': return <FaFilePdf className="text-red-500" />;
-            // case 'word': return <FaFileWord className="text-blue-600" />;
-            // case 'excel': return <FaFileExcel className="text-green-600" />;
-            // case 'ppt': return <FaFilePowerpoint className="text-orange-500" />;
-            // case 'image': return <FaImage className="text-purple-500" />;
-            // case 'audio': return <FaFileAudio className="text-yellow-500" />;
-            // case 'video': return <FaFileVideo className="text-pink-500" />;
-            // case 'archive': return <FaFileArchive className="text-gray-500" />;
-            default: return <File className="text-gray-400" />;
-        }
-    };
+
 
     // Handle file actions
-    const handleAction = (action: string, id: number) => {
+    const handleAction = (action: string, id: string) => {
         console.log(`${action} item ${id}`);
         closeContextMenu();
 
         switch (action) {
             case 'delete':
-                setFiles(files.filter(file => file.id !== id));
+                // setFiles(files.filter(file => file.id !== id));
+                // controller.SetDrive!(controller.Drive.filter(file => file.id !== id))
                 break;
             case 'download':
                 // Implement download logic
@@ -138,7 +103,7 @@ const FileBrowser = () => {
         }
     };
 
-   
+
 
     return (
         <>
@@ -154,7 +119,7 @@ const FileBrowser = () => {
                             <div className="text-sm text-gray-500">
                                 {selectedItems.size > 0
                                     ? `${selectedItems.size} item${selectedItems.size > 1 ? 's' : ''} selected`
-                                    : `${files.length} items`
+                                    : `${controller.Files.length} items`
                                 }
                             </div>
                         </div>
@@ -232,37 +197,51 @@ const FileBrowser = () => {
                 >
                     {viewMode === 'grid' ? (
                         // Grid View
+                        // Grid View
                         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-4">
-                            {sortedFiles.map((file) => (
+
+                            {/* Directories Map */}
+                            {controller.Directories.map(directory => (
                                 <div
-                                    key={file.id}
-                                    className={`bg-white rounded-lg border p-4 cursor-pointer transition-all duration-200 hover:shadow-lg ${selectedItems.has(file.id) ? 'border-blue-500 bg-blue-50' : 'border-gray-200'
+                                    key={directory.id}
+                                    className={`bg-white rounded-lg border p-4 cursor-pointer transition-all duration-200 hover:shadow-lg ${selectedItems.has(directory.id) ? 'border-blue-500 bg-blue-50' : 'border-gray-200'
                                         }`}
-                                    onClick={(e) => handleSelectItem(e, file.id)}
-                                    onContextMenu={(e) => handleContextMenu(e, file.id)}
+                                    onClick={(e) => handleSelectItem(e, directory.id)}
+                                    onContextMenu={(e) => handleContextMenu(e, directory.id)}
                                 >
-                                    <div className="flex flex-col items-center text-center">
-                                        <div className="text-4xl mb-3">
-                                            {getFileIcon(file.type)}
+                                    <div
+                                        key={directory.id}
+                                        className={`bg-white rounded-lg border p-4 cursor-pointer transition-all duration-200 hover:shadow-lg ${selectedItems.has(directory.id) ? 'border-blue-500 bg-blue-50' : 'border-gray-200'
+                                            }`}
+                                        onClick={(e) => handleSelectItem(e, directory.id)}
+                                        onContextMenu={(e) => handleContextMenu(e, directory.id)}
+                                    >
+                                        <div className="flex flex-col items-center text-center">
+                                            {/* Added transform and scale-150 to make it 150% size */}
+                                            <div className="text-4xl mb-3 transform scale-150 mt-2">
+                                                {controller.GetDriveIcon("test")}
+                                            </div>
+
                                         </div>
-                                        <div className="w-full">
-                                            <h3 className="font-medium text-gray-800 truncate mb-1">
-                                                {file.name}
-                                            </h3>
-                                            <div className="text-sm text-gray-500">
-                                                {file.type === 'folder' ? (
-                                                    <span>{file.items} items</span>
-                                                ) : (
-                                                    <span>{formatSize(file.size)}</span>
-                                                )}
-                                            </div>
-                                            <div className="text-xs text-gray-400 mt-1">
-                                                Modified: {new Date(file.modified).toLocaleDateString()}
-                                            </div>
+                                    </div>
+                                    <div className="w-full mt-4">
+                                        <h3 className="font-medium text-gray-800 truncate mb-1">
+                                            {directory.name}
+                                        </h3>
+                                        <div className="text-sm text-gray-500">
+                                            {'folder' === 'folder' ? (
+                                                <span>1 items</span>
+                                            ) : (
+                                                <span>{formatSize("0")}</span>
+                                            )}
+                                        </div>
+                                        <div className="text-xs text-gray-400 mt-1">
+                                            {/* Modified: {new Date(file.modified).toLocaleDateString()} */}
                                         </div>
                                     </div>
                                 </div>
                             ))}
+
                         </div>
                     ) : (
                         // List View
@@ -274,10 +253,10 @@ const FileBrowser = () => {
                                             <input
                                                 type="checkbox"
                                                 className="rounded"
-                                                checked={selectedItems.size === files.length}
+                                                checked={selectedItems.size === controller.Directories!.length}
                                                 onChange={(e) => {
                                                     if (e.target.checked) {
-                                                        setSelectedItems(new Set(files.map(f => f.id)));
+                                                        setSelectedItems(new Set(controller.Directories.map(f => f.id)));
                                                     } else {
                                                         setSelectedItems(new Set());
                                                     }
@@ -292,49 +271,50 @@ const FileBrowser = () => {
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {sortedFiles.map((file) => (
+
+                                    {controller.Directories.map((directory) => (
                                         <tr
-                                            key={file.id}
-                                            className={`border-b border-gray-100 hover:bg-gray-50 ${selectedItems.has(file.id) ? 'bg-blue-50' : ''
+                                            key={directory.id}
+                                            className={`border-b border-gray-100 hover:bg-gray-50 ${selectedItems.has(directory.id) ? 'bg-blue-50' : ''
                                                 }`}
-                                            onClick={(e) => handleSelectItem(e, file.id)}
-                                            onContextMenu={(e) => handleContextMenu(e, file.id)}
+                                            onClick={(e) => handleSelectItem(e, directory.id)}
+                                            onContextMenu={(e) => handleContextMenu(e, directory.id)}
                                         >
                                             <td className="py-3 px-4">
                                                 <input
                                                     type="checkbox"
                                                     className="rounded"
-                                                    checked={selectedItems.has(file.id)}
-                                                    onChange={(e) => handleSelectItem(e, file.id)}
+                                                    checked={selectedItems.has(directory.id)}
+                                                    onChange={(e) => handleSelectItem(e, directory.id)}
                                                 />
                                             </td>
                                             <td className="py-3 px-4">
                                                 <div className="flex items-center space-x-3">
                                                     <div className="text-xl">
-                                                        {getFileIcon(file.type)}
+                                                        {/* {getFileIcon(file.type)} */}
                                                     </div>
                                                     <span className="font-medium text-gray-800">
-                                                        {file.name}
+                                                        {directory.name}
                                                     </span>
                                                 </div>
                                             </td>
                                             <td className="py-3 px-4 text-gray-600">
-                                                {formatSize(file.size)}
+                                                {formatSize("0")}
                                             </td>
                                             <td className="py-3 px-4">
                                                 <span className="px-2 py-1 bg-gray-100 text-gray-600 text-xs rounded capitalize">
-                                                    {file.type}
+                                                    {/* {file.type} */}
                                                 </span>
                                             </td>
                                             <td className="py-3 px-4 text-gray-600">
-                                                {new Date(file.modified).toLocaleDateString()}
+                                                {/* {new Date(file.modified).toLocaleDateString()} */}
                                             </td>
                                             <td className="py-3 px-4">
                                                 <button
                                                     className="p-2 hover:bg-gray-100 rounded"
                                                     onClick={(e) => {
                                                         e.stopPropagation();
-                                                        handleContextMenu(e, file.id);
+                                                        handleContextMenu(e, directory.id);
                                                     }}
                                                 >
                                                     <EllipsisVertical className="text-gray-500" />
@@ -348,7 +328,7 @@ const FileBrowser = () => {
                     )}
 
                     {/* Empty State */}
-                    {sortedFiles.length === 0 && (
+                    {controller.Directories.length === 0 && (
                         <div className="text-center py-16">
                             <Cloud className="text-gray-300 text-6xl mx-auto mb-4" />
                             <h3 className="text-xl font-medium text-gray-500 mb-2">

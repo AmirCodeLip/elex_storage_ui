@@ -1,7 +1,5 @@
 import { Outlet, Link } from "react-router-dom";
-import data from "../data";
 import { useAuth, AuthType } from 'contexts/AuthProvider';
-import { ShoppingCart24X, NavIcon } from 'Icons';
 import { User } from 'lucide-react';
 
 function IdentityComponent({ identityData }: { identityData: AuthType | null }) {
@@ -30,7 +28,6 @@ function Layout() {
 
                     {/* <!-- logo cart --> */}
                     <Link to="cart">
-                        <ShoppingCart24X></ShoppingCart24X>
                     </Link>
 
                     {/* <!-- search bar --> */}
@@ -40,8 +37,7 @@ function Layout() {
 
                 {/* <!-- logo --> */}
                 <div className="text-center w-full md:w-auto md:text-right md:flex items-center space-x-4 font-bold mr-4" style={{ fontStyle: "italic" }}>
-
-                    {data.settings.siteNameEN}
+                    Elex storage
                 </div>
 
             </div>
@@ -51,7 +47,8 @@ function Layout() {
                 <div className="flex items-center w-full">
                     <nav className="flex md:hidden mr-auto text-left ltr w-full">
                         <a href="/" className="nav-icon">
-                            <NavIcon></NavIcon>
+                            X
+                            {/* <NavIcon></NavIcon> */}
                         </a>
                     </nav>
 

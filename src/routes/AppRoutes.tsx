@@ -1,27 +1,23 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import About from "../pages/About";
 import Home from "../pages/Home";
-import Details from "../pages/Details";
-import Categories from "../pages/Categories";
-import ShoppingCart from "../pages/ShoppingCart";
-import Layout from "../pages/Layout";
+import Details from "@pages/Details";
+import Layout from "@pages/Layout";
 import { useCart, CartProvider, CartContextType } from '../contexts/CartContext';
 import { useAuth, AuthProvider } from '../contexts/AuthProvider';
 import React, { createContext, useContext, ReactNode, useReducer } from 'react';
-import Authenticate from "../pages/authentication/Auth";
-import ChangePassword from "../pages/Dashboard/ChangePassword";
-import DashboardHome from "pages/Dashboard/DashboardHome";
-import TerminalsCreate from "pages/Dashboard/Terminals/Create";
-import TerminalsList from "pages/Dashboard/Terminals/List";
-import TerminalsEdit from "pages/Dashboard/Terminals/Edit";
-import PaymentsList from "pages/Dashboard/Payments/List";
-import PaymentsCreate from "pages/Dashboard/Payments/Create";
-import PaymentsEdit from "pages/Dashboard/Payments/Edit";
-import DashboardLayout from "pages/Dashboard/DashboardLayout";
-import TransationList from "pages/Dashboard//Transations/List";
-import { useLocation } from "react-router-dom";
-import { publicPages } from "data";
-import PublicForm from "pages/PublicForm"
+import Authenticate from "@pages/authentication/Auth";
+import ChangePassword from "@pages/Dashboard/ChangePassword";
+import DashboardHome from "@pages/Dashboard/DashboardHome";
+import TerminalsCreate from "@pages/Dashboard/Terminals/Create";
+import TerminalsList from "@pages/Dashboard/Terminals/List";
+import TerminalsEdit from "@pages/Dashboard/Terminals/Edit";
+import PaymentsList from "@pages/Dashboard/Payments/List";
+import PaymentsCreate from "@pages/Dashboard/Payments/Create";
+import PaymentsEdit from "@pages/Dashboard/Payments/Edit";
+import DashboardLayout from "@pages/Dashboard/DashboardLayout";
+import TransationList from "@pages/Dashboard/Transations/List";
+
 function NotFound() {
   return (
     <div className="mt-2 relative" style={{ backgroundColor: "#6d8d98" }}>
@@ -40,14 +36,12 @@ const AppRoutes = () => {
           <Routes>
             <Route path="/" element={<Layout />}>
               <Route index element={<Home />} />
-              <Route path="categories/:id" element={<Categories />} />
               <Route path="about" element={<About />} />
               <Route path="details/:id" element={<Details />} />
-              <Route path="cart" element={<ShoppingCart />} />
               <Route path="authenticate" element={<Authenticate />}></Route>
-              {publicPages.map(x => {
+              {/* {publicPages.map(x => {
                 return (<Route path={"/forms/" + x.url} element={<PublicForm />}></Route>);
-              })}
+              })} */}
               {/* Catch-all 404 route */}
               <Route path="/not-found" element={<NotFound />} />
               <Route path="*" element={<NotFound />} />

@@ -1,20 +1,20 @@
 import { useAuth } from 'contexts/AuthProvider';
 import { Outlet, Link } from "react-router-dom";
-import { Schedule24X, ArrowLeftX24 } from 'Icons';
 import { reach } from 'yup';
 import React, { PropsWithChildren } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
+import { FanIcon,ArrowLeft,Timer } from 'lucide-react';
 
 
 function RightbarDropMenuComponent({ children, title }: PropsWithChildren<{ title: string }>) {
   return (<div className='rightbar-item'>
 
     <div className='flex rightbar-item-title'>
-      <Schedule24X className='mr-2' fill='var(--color_layer_001)'></Schedule24X>
+      <Timer className='mr-2' fill='var(--color_layer_001)'></Timer>
       <div className='mr-3'>{title}</div>
-      <div className="absolute left-5"><ArrowLeftX24 fill='var(--color_layer_045)'></ArrowLeftX24></div>
+      <div className="absolute left-5"><ArrowLeft fill='var(--color_layer_045)'></ArrowLeft></div>
     </div>
     <div>
       {children}
@@ -94,30 +94,30 @@ export default function DashboardLayout() {
 
             <div className='rightbar-item'>
               <div className='flex rightbar-item-title'>
-                <Schedule24X className='mr-2' fill='var(--color_layer_001)'></Schedule24X>
+                <Timer className='mr-2' fill='var(--color_layer_001)'></Timer>
                 <div className='mr-3'>داشبورد</div>
               </div>
             </div>
 
             <div className='rightbar-item'>
               <div className='flex rightbar-item-title'>
-                <Schedule24X className='mr-2' fill='var(--color_layer_001)'></Schedule24X>
+                <Timer className='mr-2' fill='var(--color_layer_001)'></Timer>
                 <div className='mr-3'>پشتیبانی</div>
-                <a className="absolute left-5"><ArrowLeftX24 fill='var(--color_layer_045)'></ArrowLeftX24></a>
+                <a className="absolute left-5"><ArrowLeft fill='var(--color_layer_045)'></ArrowLeft></a>
               </div>
             </div>
 
             <RightbarDropMenuComponent title='مدیریت ترمینال ها'>
 
               <Link to="/dashboard/terminals/list" className='flex rightbar-item-single'>
-                <ArrowLeftX24 className='mr-2' fill='var(--color_layer_001)'></ArrowLeftX24>
+                <ArrowLeft className='mr-2' fill='var(--color_layer_001)'></ArrowLeft>
                 <div className='mr-3'>
                   فهرست ترمینال ها
                 </div>
               </Link>
 
               <Link to="/dashboard/terminals/create" className='flex rightbar-item-single'>
-                <ArrowLeftX24 className='mr-2' fill='var(--color_layer_001)'></ArrowLeftX24>
+                <ArrowLeft className='mr-2' fill='var(--color_layer_001)'></ArrowLeft>
                 <div className='mr-3'>
                   افزودن ترمینال جدید
                 </div>
@@ -127,14 +127,14 @@ export default function DashboardLayout() {
 
             <RightbarDropMenuComponent title='مدیریت لینک ها'>
               <Link to="/dashboard/payments/list" className='flex rightbar-item-single'>
-                <ArrowLeftX24 className='mr-2' fill='var(--color_layer_001)'></ArrowLeftX24>
+                <ArrowLeft className='mr-2' fill='var(--color_layer_001)'></ArrowLeft>
                 <div className='mr-3'>
                   فهرست لینک های پرداخت
                 </div>
               </Link>
 
               <Link to="/dashboard/payments/create" className='flex rightbar-item-single'>
-                <ArrowLeftX24 className='mr-2' fill='var(--color_layer_001)'></ArrowLeftX24>
+                <ArrowLeft className='mr-2' fill='var(--color_layer_001)'></ArrowLeft>
                 <div className='mr-3'>
                   ایجاد لینک پرداخت جدید
                 </div>
@@ -142,21 +142,21 @@ export default function DashboardLayout() {
             </RightbarDropMenuComponent>
             <div className='rightbar-item'>
               <Link className='flex rightbar-item-title' to="/dashboard/transations/list">
-                <Schedule24X className='mr-2' fill='var(--color_layer_001)'></Schedule24X>
+                <Timer className='mr-2' fill='var(--color_layer_001)'></Timer>
                 <div className='mr-3'>فهرست تراکنش ها</div>
               </Link>
             </div>
             
             <div className='rightbar-item'>
               <div className='flex rightbar-item-title'>
-                <Schedule24X className='mr-2' fill='var(--color_layer_001)'></Schedule24X>
+                <Timer className='mr-2' fill='var(--color_layer_001)'></Timer>
                 <Link to='/dashboard/changePassword' className='mr-3'>تعییر گذرواژه</Link>
               </div>
             </div>    
             
               <div className='rightbar-item'>
               <div className='flex rightbar-item-title'>
-                <Schedule24X className='mr-2' fill='var(--color_layer_001)'></Schedule24X>
+                <Timer className='mr-2' fill='var(--color_layer_001)'></Timer>
                 <a className='mr-3' onClick={logout_User}>خروج</a>
               </div>
             </div>
