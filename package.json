@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@elex-storage/js-client": "file:../elex-storage-js-client-1.0.8.tgz",
+    "@elex-storage/js-client": "file:../elex-storage-js-client-1.0.9.tgz",
     "@hookform/resolvers": "^5.0.1",
     "@tailwindcss/postcss": "^4.0.17",
     "@testing-library/dom": "^10.4.0",

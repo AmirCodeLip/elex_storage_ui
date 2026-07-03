@@ -38,8 +38,6 @@ const FileBrowser = () => {
         controller.SetContextMenu!({ show: false, x: 0, y: 0, itemId: "0" })
     };
 
-
-
     // Handle item selection
     const handleSelectItem = (e: any, id: string) => {
         // React.MouseEvent<HTMLElement, MouseEvent>
@@ -73,7 +71,7 @@ const FileBrowser = () => {
     };
 
     // Format file size
-    const formatSize = (size: string) => {
+    const formatSize = (size: number) => {
         return size ?? 0;
     };
 
@@ -197,7 +195,6 @@ const FileBrowser = () => {
                 >
                     {viewMode === 'grid' ? (
                         // Grid View
-                        // Grid View
                         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-4">
 
                             {/* Directories Map */}
@@ -219,7 +216,7 @@ const FileBrowser = () => {
                                         <div className="flex flex-col items-center text-center">
                                             {/* Added transform and scale-150 to make it 150% size */}
                                             <div className="text-4xl mb-3 transform scale-150 mt-2">
-                                                {controller.GetDriveIcon("test")}
+                                                {controller.GetDriveIcon("directory")}
                                             </div>
 
                                         </div>
@@ -229,11 +226,7 @@ const FileBrowser = () => {
                                             {directory.name}
                                         </h3>
                                         <div className="text-sm text-gray-500">
-                                            {'folder' === 'folder' ? (
-                                                <span>1 items</span>
-                                            ) : (
-                                                <span>{formatSize("0")}</span>
-                                            )}
+                                            <span>1 items</span>
                                         </div>
                                         <div className="text-xs text-gray-400 mt-1">
                                             {/* Modified: {new Date(file.modified).toLocaleDateString()} */}
@@ -241,6 +234,45 @@ const FileBrowser = () => {
                                     </div>
                                 </div>
                             ))}
+
+                            {/* Files Map */}
+                            {controller.Files.map(file => (
+                                <div
+                                    key={file.id}
+                                    className={`bg-white rounded-lg border p-4 cursor-pointer transition-all duration-200 hover:shadow-lg ${selectedItems.has(file.id) ?
+                                        'border-blue-500 bg-blue-50' : 'border-gray-200'}`}
+                                    onClick={(e) => handleSelectItem(e, file.id)}
+                                    onContextMenu={(e) => handleContextMenu(e, file.id)}
+                                >
+                                    <div
+                                        key={file.id}
+                                        className={`bg-white rounded-lg border p-4 cursor-pointer transition-all duration-200 hover:shadow-lg ${selectedItems.has(file.id) ? 'border-blue-500 bg-blue-50' : 'border-gray-200'
+                                            }`}
+                                        onClick={(e) => handleSelectItem(e, file.id)}
+                                        onContextMenu={(e) => handleContextMenu(e, file.id)}
+                                    >
+                                        <div className="flex flex-col items-center text-center">
+                                            {/* Added transform and scale-150 to make it 150% size */}
+                                            <div className="text-4xl mb-3 transform scale-150 mt-2">
+                                                {controller.GetDriveIcon(file.file_extension)}
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                    <div className="w-full mt-4">
+                                        <h3 className="font-medium text-gray-800 truncate mb-1">
+                                            {file.name}
+                                        </h3>
+                                        <div className="text-sm text-gray-500">
+                                            <span>{formatSize(file.size)}</span>
+                                        </div>
+                                        <div className="text-xs text-gray-400 mt-1">
+                                            {/* Modified: {new Date(file.modified).toLocaleDateString()} */}
+                                        </div>
+                                    </div>
+                                </div>
+                            ))}
+
 
                         </div>
                     ) : (
@@ -275,8 +307,8 @@ const FileBrowser = () => {
                                     {controller.Directories.map((directory) => (
                                         <tr
                                             key={directory.id}
-                                            className={`border-b border-gray-100 hover:bg-gray-50 ${selectedItems.has(directory.id) ? 'bg-blue-50' : ''
-                                                }`}
+                                            className={`border-b border-gray-100 hover:bg-gray-50 ${selectedItems.has(directory.id)
+                                                ? 'bg-blue-50' : ''}`}
                                             onClick={(e) => handleSelectItem(e, directory.id)}
                                             onContextMenu={(e) => handleContextMenu(e, directory.id)}
                                         >
@@ -291,7 +323,7 @@ const FileBrowser = () => {
                                             <td className="py-3 px-4">
                                                 <div className="flex items-center space-x-3">
                                                     <div className="text-xl">
-                                                        {/* {getFileIcon(file.type)} */}
+                                                        {controller.GetDriveIcon("directory", "small")}
                                                     </div>
                                                     <span className="font-medium text-gray-800">
                                                         {directory.name}
@@ -299,15 +331,16 @@ const FileBrowser = () => {
                                                 </div>
                                             </td>
                                             <td className="py-3 px-4 text-gray-600">
-                                                {formatSize("0")}
+                                                {formatSize(0)}
                                             </td>
                                             <td className="py-3 px-4">
                                                 <span className="px-2 py-1 bg-gray-100 text-gray-600 text-xs rounded capitalize">
-                                                    {/* {file.type} */}
+                                                    directory
                                                 </span>
                                             </td>
                                             <td className="py-3 px-4 text-gray-600">
                                                 {/* {new Date(file.modified).toLocaleDateString()} */}
+                                                {"2025-02-16"}
                                             </td>
                                             <td className="py-3 px-4">
                                                 <button

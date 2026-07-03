@@ -1,10 +1,10 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect, useMemo } from 'react';
 import axios from "axios";
 import "reflect-metadata";
-import { getStorage } from "@elex-storage/js-client"
+import { getStorage, uploadWithProgress } from "@elex-storage/js-client"
 import { DirectoryInfo, FileInfo, StorageItemsResponse } from "@elex-storage/js-client/models"
 import { string } from 'yup';
-import { Folder, File } from 'lucide-react';
+import { Folder, File, Image } from 'lucide-react';
 import { setFips } from 'node:crypto';
 
 interface FileContextMenu {
@@ -50,6 +50,7 @@ class HomeController {
         const [storage, error] = await getStorage("");
         if (error == null) {
             this.SetDirectories!(storage!.directories!)
+            this.SetFiles!(storage!.files)
         }
     }
 
@@ -61,42 +62,50 @@ class HomeController {
         const files = event.target!.files;
         if (files && files?.length > 0) {
             const file = files[0];
-            console.log("فایل انتخاب شده:", file.name);
-            try {
-                const formData = new FormData();
-                formData.append("file", file);
-                const response = await axios.post(
-                    "http://localhost:8082/file/upload",
-                    formData,
-                    {
-                        headers: {
-                            "Content-Type": undefined, // let browser handle it
-                        },
-                        transformRequest: (data) => data, // prevent Axios from transforming FormData
-                    }
-                );
+            // console.log("فایل انتخاب شده:", file.name);
+            const buffer = await file.arrayBuffer();
+            const byteArray = new Uint8Array(buffer);
+            let err = await uploadWithProgress(byteArray, file.name)
+            if (err != null) {
 
-
-                console.log("Upload success:", response.data);
-            } catch (error) {
-                console.error("Upload error:", error);
             }
+            // try {
+            //     const formData = new FormData();
+            //     formData.append("file", file);
+            //     const response = await axios.post(
+            //         "http://localhost:8082/file/upload",
+            //         formData,
+            //         {
+            //             headers: {
+            //                 "Content-Type": undefined, // let browser handle it
+            //             },
+            //             transformRequest: (data) => data, // prevent Axios from transforming FormData
+            //         }
+            //     );
+
+
+            //     console.log("Upload success:", response.data);
+            // } catch (error) {
+            //     console.error("Upload error:", error);
+            // }
         }
     }
 
     // Get icon based on type
-    GetDriveIcon = (type: string) => {
+    GetDriveIcon = (type: string, size?: "small" | "medium") => {
+        const s = size === "small" ? 20 : 140;
         switch (type) {
             // case 'folder': return <FaFolder className="text-blue-500" />;
             // case 'pdf': return <FaFilePdf className="text-red-500" />;
             // case 'word': return <FaFileWord className="text-blue-600" />;
             // case 'excel': return <FaFileExcel className="text-green-600" />;
             // case 'ppt': return <FaFilePowerpoint className="text-orange-500" />;
-            // case 'image': return <FaImage className="text-purple-500" />;
+            case '.jpg': return <Image className="text-blue-400" size={s} />;
             // case 'audio': return <FaFileAudio className="text-yellow-500" />;
             // case 'video': return <FaFileVideo className="text-pink-500" />;
             // case 'archive': return <FaFileArchive className="text-gray-500" />;
-            default: return <Folder className="text-gray-400" size={140} />
+            case 'directory': return <Folder className="text-blue-400" size={s} />;
+            default: return <File className="text-blue-400" size={s} />;
         }
     };
 
@@ -109,13 +118,15 @@ export function NewHomeController() {
     const loading = useState(true);
     const directories = useState<DirectoryInfo[]>([]);
     const files = useState<FileInfo[]>([]);
-
-    var controller = new HomeController(contextMenu, loading, directories, files, fileInputRef);
-
+    /// Create new controller and inject dependencies.
+    const controller = useMemo(
+        () => new HomeController(contextMenu, loading, directories, files, fileInputRef),
+        [contextMenu, loading, directories, files, fileInputRef]
+    );
     useEffect(() => {
+        /// Load directores and files.
         controller.LoadData();
-    }, []); // <-- The empty array means "run only once on mount"
-
+    });
     return controller
 }
 
